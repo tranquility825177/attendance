@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Attendance Scanner</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #eef2f7;
+            text-align: center;
+        }
+
+        video {
+            width: 600px;
+            border-radius: 10px;
+            border: 3px solid #0b57d0;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        #status {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Scan your QR Code</h2>
+    <div id="reader" style="width:500px;margin:auto;"></div>
+    <p id="status">Waiting for QR...</p>
+    
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
+
+</body>
+</html>

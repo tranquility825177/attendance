@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Officer Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #eef2f7;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #0b57d0;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% if attendance == "success" %}
+
+    <div style="
+background:#d4edda;
+color:#155724;
+padding:15px;
+margin-bottom:20px;
+border-radius:8px;
+border:1px solid #c3e6cb;
+text-align:center;
+font-weight:bold;
+">
+
+        ✅ Attendance Marked Successfully
+
+    </div>
+
+    {% endif %}
+
+    <div class="container">
+        <h2>
+            Welcome {{ officer.full_name }}
+        </h2>
+        <hr>
+        <p>
+            <b>Employee ID :</b>
+            {{ officer.employee_id }}
+        </p>
+        <p>
+            <b>Email :</b>
+            {{ officer.email }}
+        </p>
+        <p>
+            <b>Phone :</b>
+            {{ officer.phone }}
+        </p>
+        <p>
+            <b>Status :</b>
+            {{ officer.status }}
+        </p>
+        <a class="btn" href="/download_qr">Download QR</a>
+        <a class="btn" href="/attendance">Mark Attendance</a>
+        <a class="btn" href="/logout_officer">Logout</a>
+
+    </div>
+</body>
+
+</html>

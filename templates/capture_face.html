@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Capture Face</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #eef2f7;
+            text-align: center;
+        }
+
+        .container {
+            width: 700px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+        }
+
+        video {
+            width: 600px;
+            border: 3px solid #0b57d0;
+            border-radius: 10px;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        button {
+
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #0b57d0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+
+        }
+
+        #status {
+
+            margin-top: 20px;
+            font-weight: bold;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Capture Face</h2>
+        <video id="video" autoplay></video>
+        <canvas id="canvas"></canvas>
+
+        <br>
+
+        <button onclick="captureImage()">Capture Face</button>
+        <p id="status"></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/face-api.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/capture_face.js') }}"></script>
+
+</body>
+</html>

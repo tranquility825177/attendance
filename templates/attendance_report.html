@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Attendance Report</title>
+
+    <style>
+        body {
+
+            font-family: Arial;
+
+            background: #eef2f7;
+
+            padding: 30px;
+
+        }
+
+        h2 {
+
+            margin-bottom: 20px;
+
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+
+        }
+
+        th {
+
+            background: #0b57d0;
+
+            color: white;
+
+            padding: 12px;
+
+        }
+
+        td {
+
+            padding: 12px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #ddd;
+
+        }
+
+        img {
+
+            width: 90px;
+
+            border-radius: 8px;
+
+        }
+
+        .back {
+
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            padding: 10px 18px;
+
+            background: #0b57d0;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+        }
+
+        form {
+
+            margin-bottom: 25px;
+
+        }
+
+        input,
+        select {
+
+            padding: 10px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 15px;
+
+        }
+
+        button {
+
+            padding: 10px 20px;
+
+            border: none;
+
+            background: #0b57d0;
+
+            color: white;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+        }
+
+        button:hover {
+
+            background: #0847a6;
+
+        }
+
+        a {
+
+            padding: 10px 20px;
+
+            background: #6c757d;
+
+            color: white;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <a href="/dashboard" class="back">
+
+        ← Dashboard
+
+    </a>
+
+    <form method="GET">
+
+        <div style="display:flex;gap:15px;flex-wrap:wrap;margin-bottom:25px;">
+
+            <input type="date" name="date" value="{{ request.args.get('date','') }}">
+
+            <select name="employee">
+
+                <option value="">All Employees</option>
+
+                {% for emp in employees %}
+
+                <option value="{{ emp.id }}" {% if request.args.get("employee")==emp.id|string %} selected {% endif %}>
+
+                    {{ emp.employee_id }} - {{ emp.full_name }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <input type="text" name="search" placeholder="Employee ID or Name"
+                value="{{ request.args.get('search','') }}">
+
+            <button type="submit">
+
+                Filter
+
+            </button>
+
+            <a href="/attendance_report">
+
+                Reset
+
+            </a>
+
+        </div>
+
+    </form>
+
+    <h2>Attendance Report</h2>
+
+    <table>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Employee ID</th>
+
+            <th>Name</th>
+
+            <th>Date</th>
+
+            <th>Type</th>
+
+            <th>Time</th>
+
+            <th>QR</th>
+
+            <th>Face</th>
+
+            <th>Photo</th>
+
+        </tr>
+
+        {% for row in records %}
+
+        <tr>
+
+            <td>{{ row.id }}</td>
+
+            <td>{{ row.employee_id }}</td>
+
+            <td>{{ row.full_name }}</td>
+
+            <td>{{ row.attendance_date }}</td>
+
+            <td>{{ row.attendance_type }}</td>
+
+            <td>{{ row.attendance_time }}</td>
+
+            <td>
+
+                {% if row.qr_verified %}
+
+                ✅
+
+                {% else %}
+
+                ❌
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if row.face_verified %}
+
+                ✅
+
+                {% else %}
+
+                ❌
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if row.photo_path %}
+
+                <img src="/{{ row.photo_path }}">
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>

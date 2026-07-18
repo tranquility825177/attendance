@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Registration</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #dbeafe, #f5f7fb);
+        }
+
+        .container {
+            width: 480px;
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 18px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .logo h1 {
+            color: #0b57d0;
+            font-size: 32px;
+        }
+
+        .logo p {
+            color: #666;
+            margin-top: 6px;
+            font-size: 15px;
+        }
+
+        hr {
+            margin: 15px 0 20px;
+            border: none;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d0d0d0;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            transition: .3s;
+        }
+
+        .input-group input:focus {
+            border-color: #0b57d0;
+            box-shadow: 0 0 8px rgba(11, 87, 208, .2);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            background: linear-gradient(to right, #0b57d0, #2563eb);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, .3);
+        }
+
+        .bottom {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .bottom a {
+            color: #0b57d0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .bottom a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='js/face-api.min.js') }}"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <h1>DITEC Assam</h1>
+            <p>Smart Attendance Management System</p>
+        </div>
+        <hr>
+        <h2>Officer Registration</h2>
+
+        <form method="POST">
+            <div class="input-group">
+                <label>Aadhaar Number</label>
+                <input type="text" name="aadhaar" maxlength="12" required>
+            </div>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" maxlength="10" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <hr>
+
+            <h3 style="margin-bottom:15px;text-align:center;">Face Enrollment</h3>
+            <video id="video" width="380" height="280" autoplay muted style=" display:block; margin:auto; border-radius:10px; border:2px solid #0b57d0;"></video>
+            <p id="faceStatus" style=" text-align:center; margin:15px; font-weight:bold; color:red; ">Face not captured</p>
+            <div style="text-align:center;">
+                <button type="button" id="captureBtn">Capture Face</button>
+            </div>
+            <input type="hidden" id="face_descriptor" name="face_descriptor">
+            <button type="submit">Register Officer</button>
+        </form>
+
+        <div class="bottom">
+            Already registered?
+            <a href="/officer">Officer Login</a>
+            <br><br>
+            <a href="/">⬅ Back to Home</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/register_face.js') }}"></script>
+</body>
+</html>
